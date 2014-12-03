@@ -49,7 +49,7 @@ void loop()
     } 
     else if(incomingInt>10)
     {
-      rechterSpeedVooruit=incomingInt;
+      rechterSpeedVooruit=255-incomingInt;
       linkerSpeedVooruit=250;
       linkerSpeedAchter=0;
       rechterSpeedAchter=0;
@@ -58,7 +58,7 @@ void loop()
     else if(incomingInt<-10)
     {
       rechterSpeedVooruit=255;
-      linkerSpeedVooruit=incomingInt*-1;
+      linkerSpeedVooruit=255-incomingInt*-1;
       linkerSpeedAchter=0;
       rechterSpeedAchter=0;
       Rijden();
