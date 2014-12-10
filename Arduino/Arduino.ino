@@ -2,7 +2,7 @@ int rechterSpeedVooruit = 0;
 int rechterSpeedAchter=0;
 int linkerSpeedVooruit = 0;
 int linkerSpeedAchter=0;
-char incomingText;
+String incomingText;
 int incomingByte;
 double calc=0;
 
@@ -19,61 +19,53 @@ void loop()
     calc=0;
     if (Serial.available()) { 
       // if the data came
-        incomingText = Serial.read(); // read byte
-        incomingByte=incomingText-'0';
-        if(incomingText=='0')
-        {
-          rechterSpeedVooruit=0;
-          linkerSpeedVooruit=0;
+      incomingByte=Serial.parseInt();
+        
+      // straight
+      if (incomingByte >-25 && incomingByte < 25) {
+          rechterSpeedVooruit = 127;
+          linkerSpeedVooruit = 127;
           linkerSpeedAchter=0;
           rechterSpeedAchter=0;
           Rijden();
-        }
-        if(incomingByte==2){
-          rechterSpeedVooruit=255;
-          linkerSpeedVooruit=255;
+      }
+      // right
+      else if (incomingByte > 30 && incomingByte < 60) {
+          rechterSpeedVooruit = 61;
+          linkerSpeedVooruit = 127;
           linkerSpeedAchter=0;
           rechterSpeedAchter=0;
           Rijden();
-        }
-        if(incomingByte==3){
-          rechterSpeedVooruit=0;
-          linkerSpeedVooruit=0;
-          linkerSpeedAchter=255;
-          rechterSpeedAchter=255;
+      }
+      // left
+      else if (incomingByte < -30 && incomingByte > -60) {
+          rechterSpeedVooruit = 127;
+          linkerSpeedVooruit = 61;
+          linkerSpeedAchter=0;
+          rechterSpeedAchter=0;
           Rijden();
-        }
-        if(incomingByte>10)
-        {
-            calc = (calc/10)*25.5;
-            rechterSpeedVooruit=calc;
-            linkerSpeedVooruit=255;
-            linkerSpeedAchter=0;
-            rechterSpeedAchter=0;
-            
-        }  
-        if(incomingByte<-10)
-        {
-            calc = -((calc/10)*25.5);
-            rechterSpeedVooruit=calc;
-            linkerSpeedVooruit=255;
-            linkerSpeedAchter=0;
-            rechterSpeedAchter=0;       
-        }  
-        if(incomingByte=='-200')
-        {
-          LeggedStille();
-        }
-    Serial.println(Serial.read());  // print message
-    Serial.println(incomingByte);
-    Serial.println(incomingText);
-    Serial.write("1");
-    Rijden();
+      }
+      // stop      
+      else if (incomingByte == 200) {
+        LeggedStille();
+      }
+      
+      Serial.println(Serial.read());  // print message
+      Serial.println(incomingByte);
+      Serial.println(incomingText);
+      Serial.write("1");
+      Rijden();
    }
 }
 
 void LeggedStille()
-{        
+{ 
+
+
+  rechterSpeedVooruit=0;
+  linkerSpeedVooruit=0;
+  linkerSpeedAchter=0;
+  rechterSpeedAchter=0;  
   analogWrite(5,0);
   analogWrite(6,0);
   analogWrite(10,0);
