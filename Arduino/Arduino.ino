@@ -31,16 +31,16 @@ void loop()
       }
       // right
       else if (incomingByte > 30 && incomingByte < 60) {
-          rechterSpeedVooruit = 61;
-          linkerSpeedVooruit = 127;
+          rechterSpeedVooruit = 200;
+          linkerSpeedVooruit = 80;
           linkerSpeedAchter=0;
           rechterSpeedAchter=0;
           Rijden();
       }
       // left
       else if (incomingByte < -30 && incomingByte > -60) {
-          rechterSpeedVooruit = 127;
-          linkerSpeedVooruit = 61;
+          rechterSpeedVooruit = 80;
+          linkerSpeedVooruit = 200;
           linkerSpeedAchter=0;
           rechterSpeedAchter=0;
           Rijden();
