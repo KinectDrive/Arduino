@@ -22,24 +22,39 @@ void loop()
       incomingByte=Serial.parseInt();
         
       // straight
-      if (incomingByte >-25 && incomingByte < 25) {
-          rechterSpeedVooruit = 127;
-          linkerSpeedVooruit = 127;
+      if (incomingByte >-15 && incomingByte < 15) {
+          rechterSpeedVooruit = 210;
+          linkerSpeedVooruit = 200;
           linkerSpeedAchter=0;
           rechterSpeedAchter=0;
           Rijden();
       }
       // right
-      else if (incomingByte > 30 && incomingByte < 60) {
-          rechterSpeedVooruit = 200;
-          linkerSpeedVooruit = 80;
+      else if (incomingByte > 16 && incomingByte < 40) {
+          rechterSpeedVooruit = 210;
+          linkerSpeedVooruit = 175;
           linkerSpeedAchter=0;
           rechterSpeedAchter=0;
           Rijden();
       }
       // left
-      else if (incomingByte < -30 && incomingByte > -60) {
-          rechterSpeedVooruit = 80;
+      else if (incomingByte < -16 && incomingByte > -40) {
+          rechterSpeedVooruit = 175;
+          linkerSpeedVooruit = 200;
+          linkerSpeedAchter=0;
+          rechterSpeedAchter=0;
+          Rijden();
+      }
+      else if (incomingByte > 41 && incomingByte < 70) {
+          rechterSpeedVooruit = 210;
+          linkerSpeedVooruit = 150;
+          linkerSpeedAchter=0;
+          rechterSpeedAchter=0;
+          Rijden();
+      }
+      // left
+      else if (incomingByte < -41 && incomingByte > -70) {
+          rechterSpeedVooruit = 150;
           linkerSpeedVooruit = 200;
           linkerSpeedAchter=0;
           rechterSpeedAchter=0;
